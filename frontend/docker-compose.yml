@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  frontend:
+    image: investment-simulator/frontend
+    build:
+      context: .
+    ports:
+    - 3000:3000
+    networks:
+      - investment-simulator-network
+    environment:
+      API_URL: "http://localhost:8080"
+      NEXT_PUBLIC_PROXY_URL: "http://0.0.0.0:3000"
+
+networks:
+  investment-simulator-network:
+    driver: bridge
