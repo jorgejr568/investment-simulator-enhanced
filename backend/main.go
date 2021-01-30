@@ -35,6 +35,6 @@ func main() {
 		Name:    "FastHttpLogger",
 	}
 
-	log.Info().Msgf("Server started at http://localhost%s", cfg.GetEnv().PORT)
-	log.Fatal().Err(s.ListenAndServe(cfg.GetEnv().PORT)).Msg("Couldn't start ListenAndServe")
+	log.Info().Msgf("Server started at http://localhost%s", cfg.GetEnv().ADDR)
+	log.Fatal().Err(s.ListenAndServe(cfg.GetEnv().ADDR)).Msg("Couldn't start ListenAndServe")
 }
