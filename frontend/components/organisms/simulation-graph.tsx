@@ -17,39 +17,32 @@ export const SimulationGraph = ({ calculation }: ISimulationGraphProps) => {
     amount: partial.total_amount / 100,
   }))
 
-  const dataset_invested = calculation.partials.map((partial, x) => ({
-    month: x + 1,
-    amount: partial.invested_amount / 100,
-  }))
   const dataset_interest = calculation.partials.map((partial, x) => ({
     month: x + 1,
     amount: partial.interest_amount / 100,
   }))
 
-  return (
-    <VictoryChart theme={VictoryTheme.material}>
-      <VictoryLine
-        data={dataset_total}
-        x="month"
-        y="amount"
-        interpolation="natural"
-        style={{ data: { stroke: theme.palette.grey['500'] } }}
-      />
-      <VictoryLine
-        data={dataset_interest}
-        x="month"
-        y="amount"
-        interpolation="natural"
-        style={{ data: { stroke: theme.palette.success.main } }}
-      />
+  const dataset_invested = calculation.partials.map((partial, x) => ({
+    month: x + 1,
+    amount: partial.total_amount / 100,
+    y0: dataset_interest[x].amount,
+  }))
 
-      <VictoryLine
+  return (
+    <VictoryChart theme={VictoryTheme.grayscale}>
+      <VictoryBar
         data={dataset_invested}
         x="month"
         y="amount"
-        interpolation="natural"
-        style={{ data: { stroke: theme.palette.secondary.main } }}
+        style={{ data: { fill: theme.palette.primary.main } }}
       />
+      <VictoryBar
+        data={dataset_interest}
+        x="month"
+        y="amount"
+        style={{ data: { fill: theme.palette.secondary.main } }}
+      />
+
       <VictoryAxis
         dependentAxis
         tickFormat={(x) => {
@@ -60,7 +53,11 @@ export const SimulationGraph = ({ calculation }: ISimulationGraphProps) => {
           amount /= 1000
           return `$${amount}M`
         }}
-        style={{ tickLabels: { fontSize: '9px' } }}
+        style={{
+          tickLabels: { fontSize: '9px' },
+          axis: { stroke: 'none' },
+          grid: { stroke: theme.palette.grey[500], strokeDasharray: '5' },
+        }}
       />
     </VictoryChart>
   )

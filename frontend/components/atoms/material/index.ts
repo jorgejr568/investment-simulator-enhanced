@@ -14,6 +14,8 @@ import {
   CardHeader,
   Fab,
   Tooltip,
+  Link,
+  Chip,
 } from '@material-ui/core'
 
 export * from './icons'
@@ -34,4 +36,6 @@ export {
   ListItemText,
   Fab,
   Tooltip,
+  Link as MaterialLink,
+  Chip,
 }
