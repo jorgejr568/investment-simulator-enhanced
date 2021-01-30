@@ -1,6 +1,5 @@
 import axios, { Method } from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { constants } from 'http2'
 
 const API = axios.create({
   baseURL: process.env.API_URL,
@@ -33,7 +32,7 @@ export default function handler(
         })
         .finally(resolve)
     } catch (e) {
-      res.status(constants.HTTP_STATUS_INTERNAL_SERVER_ERROR)
+      res.status(500)
       res.json({ error: e })
       resolve(e)
     }

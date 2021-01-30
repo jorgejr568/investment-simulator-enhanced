@@ -5,7 +5,6 @@ import {
 } from 'components/pages/simulations'
 import { GetServerSidePropsContext } from 'next'
 import { client } from '../../client'
-import { constants } from 'http2'
 
 const ShowSimulation = ({ calculation }: IShowSimulationPageProps) => (
   <>
@@ -17,7 +16,7 @@ const ShowSimulation = ({ calculation }: IShowSimulationPageProps) => (
 )
 export default ShowSimulation
 
-export async function getInitialProps({
+export async function getServerSideProps({
   res,
   params,
 }: GetServerSidePropsContext) {
@@ -29,7 +28,7 @@ export async function getInitialProps({
     }
     throw Error('Simulation not found')
   } catch (e) {
-    res.statusCode = constants.HTTP_STATUS_NOT_FOUND
+    res.statusCode = 404
     res.setHeader('Location', '/')
   }
   return { props: { calculation: {} } }

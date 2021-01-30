@@ -12,7 +12,6 @@
     "@types/lodash": "^4.14.168",
     "@types/victory": "^33.1.4",
     "axios": "^0.21.1",
-    "http2": "^3.3.7",
     "lodash": "^4.17.20",
     "next": "latest",
     "react": "^16.8.0",
