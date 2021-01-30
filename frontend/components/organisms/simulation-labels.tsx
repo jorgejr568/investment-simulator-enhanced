@@ -46,8 +46,8 @@ export const SimulationLabels = ({ calculation }: ISimulationLabelsProps) => {
   ]
   return (
     <Grid container justify="space-around">
-      {labels.map(({ content, color, variant }) => (
-        <Chip label={content} color={color} variant={variant} />
+      {labels.map(({ content, color, variant }, key) => (
+        <Chip label={content} color={color} variant={variant} key={key} />
       ))}
     </Grid>
   )

@@ -7,7 +7,7 @@ import {
 } from 'victory'
 import { SimulationCalculation } from 'client'
 import { theme } from 'cfg'
-import { AmountMoneyFormatter } from '../../filters'
+import { AmountMoneyFormatter, AmountPercentageFormatter } from '../../filters'
 import { VictoryLabelStyleObject } from 'victory-core'
 import { CSSProperties } from 'react'
 
@@ -24,13 +24,17 @@ export const SimulationGraph = ({ calculation }: ISimulationGraphProps) => {
     month: x + 1,
     amount: partial.total_amount / 100,
     y0: partial.invested_amount / 100,
-    label: `Interest amount: ${AmountMoneyFormatter(partial.interest_amount)}`,
+    label: `Interest amount: ${AmountMoneyFormatter(
+      partial.interest_amount
+    )} / ${AmountPercentageFormatter(partial.interest_percentage)}`,
   }))
 
   const dataset_invested = calculation.partials.map((partial, x) => ({
     month: x + 1,
     amount: partial.invested_amount / 100,
-    label: `Invested amount: ${AmountMoneyFormatter(partial.invested_amount)}`,
+    label: `Invested amount: ${AmountMoneyFormatter(
+      partial.invested_amount
+    )} / ${AmountPercentageFormatter(partial.invested_percentage)}`,
   }))
 
   const tooltipStyles: CSSProperties = {

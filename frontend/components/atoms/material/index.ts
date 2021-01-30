@@ -16,6 +16,12 @@ import {
   Tooltip,
   Link,
   Chip,
+  Table,
+  TableBody,
+  TableHead,
+  TableCell,
+  TableContainer,
+  TableRow,
 } from '@material-ui/core'
 
 export * from './icons'
@@ -38,4 +44,10 @@ export {
   Tooltip,
   Link as MaterialLink,
   Chip,
+  Table,
+  TableBody,
+  TableHead,
+  TableCell,
+  TableContainer,
+  TableRow,
 }

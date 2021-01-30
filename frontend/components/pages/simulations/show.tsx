@@ -14,7 +14,11 @@ import {
   Typography,
 } from 'components/atoms'
 import { SimulationCalculation } from 'client'
-import { SimulationGraph, SimulationLabels } from '../../organisms'
+import {
+  ShowSimulationPartialsTable,
+  SimulationGraph,
+  SimulationLabels,
+} from '../../organisms'
 import {
   AmountMoneyFormatter,
   AmountPercentageFormatter,
@@ -45,6 +49,15 @@ export const ShowSimulationPage = ({
               <SimulationLabels calculation={calculation} />
             </Box>
             <SimulationGraph calculation={calculation} />
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+    <Grid container spacing={4} alignItems="stretch">
+      <Grid item xs={12} lg={12}>
+        <Card className="h-100">
+          <CardContent>
+            <ShowSimulationPartialsTable simulation={calculation.simulation} />
           </CardContent>
         </Card>
       </Grid>
