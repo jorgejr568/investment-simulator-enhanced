@@ -2,11 +2,15 @@ import {
   VictoryAxis,
   VictoryBar,
   VictoryChart,
-  VictoryLine,
+  VictoryStyleObject,
   VictoryTheme,
+  VictoryTooltip,
 } from 'victory'
 import { SimulationCalculation } from 'client'
 import { theme } from 'cfg'
+import { AmountMoneyFormatter } from '../../filters'
+import { VictoryLabelStyleObject } from 'victory-core'
+import { CSSProperties } from 'react'
 
 export interface ISimulationGraphProps {
   calculation: SimulationCalculation
@@ -19,14 +23,26 @@ export const SimulationGraph = ({ calculation }: ISimulationGraphProps) => {
 
   const dataset_interest = calculation.partials.map((partial, x) => ({
     month: x + 1,
-    amount: partial.interest_amount / 100,
+    amount: partial.total_amount / 100,
+    y0: partial.invested_amount / 100,
+    label: `Interest amount: ${AmountMoneyFormatter(partial.interest_amount)}`,
   }))
 
   const dataset_invested = calculation.partials.map((partial, x) => ({
     month: x + 1,
-    amount: partial.total_amount / 100,
-    y0: dataset_interest[x].amount,
+    amount: partial.invested_amount / 100,
+    label: `Invested amount: ${AmountMoneyFormatter(partial.invested_amount)}`,
   }))
+
+  const tooltipStyles: CSSProperties = {
+    fontSize: '5px',
+  }
+  const tooltipFlyStyles: VictoryStyleObject = {
+    fontSize: '5px',
+    stroke: `none`,
+    backgroundColor: 'white',
+    fill: 'white',
+  }
 
   return (
     <VictoryChart theme={VictoryTheme.grayscale}>
@@ -35,12 +51,26 @@ export const SimulationGraph = ({ calculation }: ISimulationGraphProps) => {
         x="month"
         y="amount"
         style={{ data: { fill: theme.palette.primary.main } }}
+        labelComponent={
+          <VictoryTooltip
+            cornerRadius={0}
+            style={tooltipStyles}
+            flyoutStyle={tooltipFlyStyles}
+          />
+        }
       />
       <VictoryBar
         data={dataset_interest}
         x="month"
         y="amount"
         style={{ data: { fill: theme.palette.secondary.main } }}
+        labelComponent={
+          <VictoryTooltip
+            cornerRadius={0}
+            style={tooltipStyles}
+            flyoutStyle={tooltipFlyStyles}
+          />
+        }
       />
 
       <VictoryAxis
