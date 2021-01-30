@@ -1,5 +1,4 @@
 FROM node:15-alpine as build
-ENV NODE_ENV=production
 WORKDIR /build
 
 COPY package.json .
