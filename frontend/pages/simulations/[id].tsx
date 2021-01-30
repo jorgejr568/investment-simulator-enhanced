@@ -17,7 +17,7 @@ const ShowSimulation = ({ calculation }: IShowSimulationPageProps) => (
 )
 export default ShowSimulation
 
-export async function getServerSideProps({
+export async function getInitialProps({
   res,
   params,
 }: GetServerSidePropsContext) {
