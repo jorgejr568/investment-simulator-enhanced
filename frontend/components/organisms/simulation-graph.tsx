@@ -2,7 +2,6 @@ import {
   VictoryAxis,
   VictoryBar,
   VictoryChart,
-  VictoryStyleObject,
   VictoryTheme,
   VictoryTooltip,
 } from 'victory'
@@ -37,7 +36,7 @@ export const SimulationGraph = ({ calculation }: ISimulationGraphProps) => {
   const tooltipStyles: CSSProperties = {
     fontSize: '5px',
   }
-  const tooltipFlyStyles: VictoryStyleObject = {
+  const tooltipFlyStyles: VictoryLabelStyleObject = {
     fontSize: '5px',
     stroke: `none`,
     backgroundColor: 'white',
